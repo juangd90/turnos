@@ -1,17 +1,42 @@
-{% extends "app/base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+    window.addEventListener("load",function(){
+        
+        var primero=document.getElementById("primero").innerText
+        var ultimo=document.getElementById("ultimo").innerText
+      
+        document.getElementById("start").min=primero
+        document.getElementById("start").max=ultimo
+    })
+    
+    
+    </script>
+</head>
+<body>
+    {% extends "app/base.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
 <h1>Turnos</h1>
-    {% for dia in dias %}
-    
-    {{dia}}
-    {% endfor %}
+ {% for hora in horas %}
+ {{hora}}
+ {% endfor %}
 
-    {% for hora in horas %}
-    {{hora}}
-    {% endfor %}
+   <br>
+ <div id="primero">
+    {{primer_dia}}
+ </div>  
+ <div id="ultimo">
+     {{ultimo_dia}}
+ </div>
 
     <input type="date" id="start" name="fecha"
                  
     min="2021-01-01" max="2021-12-31">
 {% endblock %}
+</body>
+</html>

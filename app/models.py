@@ -3,13 +3,7 @@ from django.db.models.fields import DateField
 import datetime
 # Create your models here.
 
-dias=(
-    ("Lunes","Lunes"),
-    ("Martes","Martes"),
-    ("Miercoles","Miercoles"),
-    ("Jueves","Jueves"),
-    ("Viernes","Viernes")
-)
+
 
 horas=(
     ("08:00","08:00"),
@@ -24,7 +18,7 @@ horas=(
 )
 
 class Dia(models.Model):
-    dia=models.CharField(max_length=64,choices=dias,default="Lunes")
+    dia=models.DateField()
     disponible=models.BooleanField(default=True)
 
     

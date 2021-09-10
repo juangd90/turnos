@@ -19,10 +19,12 @@ def Turnos(request):
     if request.method=='POST':
         ...
     else:
-        dias=Dia.objects.filter(disponible=True)
+        primer_dia=Dia.objects.filter(disponible=True).first()
+        ultimo_dia=Dia.objects.filter(disponible=True).last()
         horas=Hora.objects.filter(disponible=True)
         return render(request,"app/turnos.html",{
-            'dias':dias,
+            'primer_dia':primer_dia,
+            'ultimo_dia':ultimo_dia,
             'horas':horas,
         })
 

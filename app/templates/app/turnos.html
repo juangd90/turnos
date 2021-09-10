@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<h1>Turnos</h1>
+    {% for dia in dias %}
+    
+    {{dia}}
+    {% endfor %}
+
+    {% for hora in horas %}
+    {{hora}}
+    {% endfor %}
+
+    <input type="date" id="start" name="fecha"
+                 
+    min="2021-01-01" max="2021-12-31">
+{% endblock %}

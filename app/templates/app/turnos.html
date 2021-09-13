@@ -10,9 +10,16 @@
         var primero=document.getElementById("primero").innerText
         var ultimo=document.getElementById("ultimo").innerText
       
-        document.getElementById("start").min=primero
-        document.getElementById("start").max=ultimo
+        document.getElementById("fecha").min=primero
+        document.getElementById("fecha").max=ultimo
+        for( var i=0;i<2;i++){
+            console.log(document.getElementById("turnos").innerText)
+        }
     })
+    function horarios(){
+        var seleccionado=document.getElementById("fecha").value
+        console.log(seleccionado)
+    }
     
     
     </script>
@@ -22,9 +29,24 @@
 {% load crispy_forms_tags %}
 {% block body %}
 <h1>Turnos</h1>
- {% for hora in horas %}
- {{hora}}
- {% endfor %}
+ 
+<form method="POST" action="">
+    {% csrf_token %}
+    <label for="nombre">Nombre</label>
+<input type="text" id="nombre" name="nombre"> <br>
+<label for="horas">Seleccione la hora</label>
+<select name="horas" id="horas">
+    {% for hora in horas %}
+    <option value="{{hora}}">{{hora}}</option>
+    {% endfor %}
+</select> <br>
+<label for="fecha">Seleccione la fecha</label>
+    <input type="date"  id="fecha" name="fecha"
+                 
+    min="2021-01-01" max="2021-12-31" onchange="horarios()">
+    <br>
+    <button type="submit" class="btn btn-primary">Reservar Turno</button>
+</form>
 
    <br>
  <div id="primero">
@@ -34,9 +56,19 @@
      {{ultimo_dia}}
  </div>
 
-    <input type="date" id="start" name="fecha"
-                 
-    min="2021-01-01" max="2021-12-31">
+    
+  
+    {% for t in turno %}
+    <div id="turnos">
+    {{t.nombre}}-{{ t.dia}}-{{t.hora}} 
+</div>
+    <br>
+    {% endfor %}
+
+{% for p in prueba %}    
+    {{p}}
+
+{% endfor %}    
 {% endblock %}
 </body>
 </html>

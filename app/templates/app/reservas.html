@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+    window.addEventListener("load",function(){
+        
+      var nombre=document.getElementById("nombre").value
+      console.log(nombre)
+      var dni=document.getElementById("dni").value
+      var horas=document.getElementById("horas").value
+      var dias=document.getElementById("dia").value
+      if(horas==''){
+          alert("No hay horarios disponibles, por favor elegir otro día")
+      }  
+    })
+    function validaciones(){
+        var horas=document.getElementById("horas").value
+        var dias=document.getElementById("dia").value
+        alert("Turno generado para el día "+ dias +" a las "+ horas+" horas")
+    }
+   
+  
+    
+    
+    </script>
+</head>
+<body>
+
+{% extends "app/base.html" %}
+{% block body %}
+<h2>Seleccionar horario del turno</h2>
+<p>Los horarios disponibles para el día seleccionado ({{dia}}) son los siguientes</p>
+
+<form method="POST" action="{% url 'reserva' %}">
+    {% csrf_token %}
+<label for="horas">Seleccione la hora:</label>
+<select name="horas" id="horas">
+    {% for hora in horas %}
+    <option value="{{hora}}">{{hora}}</option>
+    {% endfor %}
+</select> <br>
+<label for="nombre">Nombre:</label>
+<input type="text" id="nombre" name="nombre" value="{{nombre}}" > <br>
+<label for="dni" >DNI:</label>
+<input type="text" id="dni" name="dni" value="{{dni}}"> <br>
+<label for="fecha" >Fecha del turno:</label>
+<input type="text" id="dia" name="dia" value="{{dia}}" readonly> <br>
+<br>
+<p>Si la información es correcta, puede reservar el turno</p>
+<button type="submit" class="btn btn-primary" onclick="validaciones()">Reservar Turno</button>
+<a href="{% url 'turnos' %}" type="submit"  class="btn btn-primary">Volver</a>
+</form>
+
+{% endblock %}
+</body>
+</html>

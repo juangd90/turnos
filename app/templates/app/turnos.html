@@ -12,21 +12,27 @@
       
         document.getElementById("fecha").min=primero
         document.getElementById("fecha").max=ultimo
-        for( var i=0;i<2;i++){
-            console.log(document.getElementById("turnos").innerText)
-        }
+        
     })
-    function horarios(){
-        var seleccionado=document.getElementById("fecha").value
-        console.log(seleccionado)
+    function validaciones(){
+        let nombre=document.getElementById("nombre").value
+        let dni=document.getElementById("dni").value
+        let fecha=document.getElementById("fecha").value
+       if(nombre=='' || dni=='' || fecha=='' ){
+           alert("Debe completar todos los campos")
+           return false
+       } else{
+           return true
+       }
     }
+  
     
     
     </script>
 </head>
 <body>
     {% extends "app/base.html" %}
-{% load crispy_forms_tags %}
+
 {% block body %}
 <h1>Turnos</h1>
  
@@ -34,41 +40,30 @@
     {% csrf_token %}
     <label for="nombre">Nombre</label>
 <input type="text" id="nombre" name="nombre"> <br>
-<label for="horas">Seleccione la hora</label>
-<select name="horas" id="horas">
-    {% for hora in horas %}
-    <option value="{{hora}}">{{hora}}</option>
-    {% endfor %}
-</select> <br>
+<label for="dni">DNI</label>
+<input type="text" id="dni" name="dni"> <br>
 <label for="fecha">Seleccione la fecha</label>
     <input type="date"  id="fecha" name="fecha"
                  
-    min="2021-01-01" max="2021-12-31" onchange="horarios()">
+    min="2021-01-01" max="2021-12-31">
     <br>
-    <button type="submit" class="btn btn-primary">Reservar Turno</button>
+    <button type="submit" class="btn btn-primary" onclick=" return validaciones()">Ver horarios disponibles</button>
 </form>
 
    <br>
+Fechas disponibles para la semana del:   
  <div id="primero">
     {{primer_dia}}
  </div>  
+ Hasta el:
  <div id="ultimo">
      {{ultimo_dia}}
  </div>
 
     
   
-    {% for t in turno %}
-    <div id="turnos">
-    {{t.nombre}}-{{ t.dia}}-{{t.hora}} 
-</div>
-    <br>
-    {% endfor %}
-
-{% for p in prueba %}    
-    {{p}}
-
-{% endfor %}    
+   
+   
 {% endblock %}
 </body>
 </html>

@@ -24,5 +24,7 @@ urlpatterns = [
     path('reserva',views.reserva,name="reserva"),
     path('busqueda',views.Busqueda,name="busqueda"),
     path('alta_dia',views.AltaDia.as_view(template_name="app/crea_dia.html"),name="alta_dia"),
-    path('lista_turnos',views.ListaTurnos.as_view(template_name="app/lista_turnos.html"),name="lista_turnos")
+    path('lista_turnos',views.ListaTurnos.as_view(template_name="app/lista_turnos.html"),name="lista_turnos"),
+    path('editar_turno/<int:pk>',views.EditarTurnos.as_view(),name="editar_turno"),
+    path('lista_turnos/eliminar/<int:pk>',views.EliminarTurno.as_view(),name="eliminar_turno")
 ]

@@ -18,19 +18,18 @@ def Turnos(request):
         horas=dia.horario.all()        
         nombre=request.POST.get('nombre')
         dni=request.POST.get('dni')     
-        
+        #trae fecha, nombre y dni para empezar el proceso de reserva de turno
         return render(request,"app/reservas.html",{
           'dia':dia,
           'horas':horas,
           'nombre':nombre,
           'dni':dni,
-         
+         #pasa esa info a reservas para que se continue con el proceso
         })
     else:
         primer_dia=Dia.objects.order_by('dia').first()       
-        ultimo_dia=Dia.objects.order_by('dia').last()
-          
-            
+        ultimo_dia=Dia.objects.order_by('dia').last()         
+          #paso primer y ultimo dia para armar el calendario  
         
         return render(request,"app/turnos.html",{
             'primer_dia':primer_dia,
@@ -39,7 +38,7 @@ def Turnos(request):
             
         })
 
-def reserva(request):
+def reserva(request): #aca traigo toda la info que completa y confirma el usuario para generar la reserva del turno
     if request.method=='POST':
         nombre=request.POST.get('nombre')
         dni=request.POST.get('dni')
@@ -49,10 +48,9 @@ def reserva(request):
         dia,created=Dia.objects.get_or_create(dia=fecha)
         turno=Turno(nombre=nombre,dni=dni,dia=dia,hora=hora)
         turno.save()
-        dia.BorraHorario(horas)
-
+        dia.BorraHorario(horas)#luego de generado el turno, borro el horario asociado a ese dia
         return render(request,"app/index.html",{
-            'nombre':nombre
+            
         })
     else:
         return render(request,"app/turnos.html")
@@ -80,4 +78,17 @@ class ListaTurnos(ListView):
     form=Turno
     fields="__all__"
     success_url=reverse_lazy('index') 
+
+class EditarTurnos(UpdateView):
+    model=Turno
+    form=Turno
+    fields="__all__"
+    template_name="app/editar_turno.html"
+    success_url=reverse_lazy('lista_turnos') 
+
+class EliminarTurno(DeleteView):
+    model=Turno
+    form=Turno
+    fields="__all__"    
+    success_url=reverse_lazy('lista_turnos') 
 

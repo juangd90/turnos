@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+    {% extends "app/base.html" %}
+    {% load crispy_forms_tags %}
+    
+    {% block body %}
+    <div class="col d-flex justify-content-center align-items-center ">
+        <form method="post" class="col-8" novalidate>
+            {% csrf_token %}
+            <label for="dia">Día</label>
+          <p><input type="date" id="dia" name="dia"               
+            ></p>  
+           <label for="horarios">Horarios</label>
+         <p id="horarios">{{form.horario}}</p>  
+           
+           
+        
+        
+            
+            <input type="submit" class="btn btn-info" value="Guardar">
+        </form>
+    </div>
+    
+    {% endblock %}   
+</body>
+</html>
+
+

@@ -1,0 +1,14 @@
+{% extends "app/base.html" %}
+
+{% block body %}
+<h1>Busqueda de turnos</h1>
+
+<form method="POST" action="">
+{% csrf_token %}
+<label for="turnos">Ingrese su DNI para buscar el turno</label>
+<input type="text" id="turno" name="dni" value="">
+<button type="submit" class="btn btn-primary">Buscar</button>
+
+</form>
+
+{% endblock %}

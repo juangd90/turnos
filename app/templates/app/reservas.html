@@ -32,7 +32,7 @@
 {% extends "app/base.html" %}
 {% block body %}
 <h2>Seleccionar horario del turno</h2>
-<p>Los horarios disponibles para el día seleccionado ({{dia}}) son los siguientes</p>
+<p>Los horarios disponibles para el día seleccionado ({{dia.dia}}) son los siguientes</p>
 
 <form method="POST" action="{% url 'reserva' %}">
     {% csrf_token %}

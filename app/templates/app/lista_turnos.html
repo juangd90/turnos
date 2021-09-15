@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+{% block body %}
+<h2>Lista de turnos</h2>
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr style="align-items: center;">
+            <th>Nombre y Apellido</th>
+            <th>Fecha de Turno</th>
+            <th>Hora del turno</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for p in object_list %}
+            <tr>
+                <th>{{p.nombre}}</th>
+                <th>{{p.dia.dia}}</th>
+                <th>{{p.hora}}hs</th>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -19,18 +19,15 @@ horas=(
 )
 
 
-
-
 class Hora(models.Model):
     horas=models.CharField(max_length=64,choices=horas,default="08:00")
-    disponible=models.BooleanField(default=True)
+    
 
     def __str__(self):
         return f"{self.horas}"
         
 class Dia(models.Model):
-    dia=models.DateField()
-    disponible=models.BooleanField(default=True)
+    dia=models.DateField()    
     horario=models.ManyToManyField(Hora)
     
     #hacer metodo para borrar el horario

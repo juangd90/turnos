@@ -51,15 +51,17 @@
 </form>
 
    <br>
-Fechas disponibles para la semana del:   
- <div id="primero">
+ 
+ <div id="primero" style="opacity: 0.0;">
     {{primer_dia}}
  </div>  
- Hasta el:
- <div id="ultimo">
+
+ <div id="ultimo" style="opacity: 0.0;">
      {{ultimo_dia}}
  </div>
-
+ {% for t in todos %}
+ {{t}} <br>
+{% endfor %}
     
   
    

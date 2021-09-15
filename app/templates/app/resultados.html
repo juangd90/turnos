@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+
+{% block body %}
+<h1>Resultados:</h1>
+{% if turnos_list %}
+<div class="table-responsive">
+<table class=" table table-info" id="resultados">
+    <thead>
+      <tr>
+        
+        <th scope="col">Nombre y apellido</th>
+        <th scope="col">Fecha del turno</th>
+        <th scope="col">Hora</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in turnos_list %}
+      <tr>
+       
+        <td>{{p.nombre}}</td>
+        <td>{{p.dia.dia|date:"D d M Y"}}</td>
+        <td>{{p.hora}}</td>
+        
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+</div>
+{% else %}
+<h2>Turno no encontrado</h2>
+{% endif %}
+
+{% endblock %}

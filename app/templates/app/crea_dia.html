@@ -4,32 +4,71 @@
     <meta charset="UTF-8">
   
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <script>
+      function envia(){
+          alert("Día cargado correctamente")
+      }
+  </script>
 </head>
 <body>
     {% extends "app/base.html" %}
+    {% load static %}
     {% load crispy_forms_tags %}
     
     {% block body %}
-    <div class="col d-flex justify-content-center align-items-center ">
-        <form method="post" class="col-8" novalidate>
-            {% csrf_token %}
-            <label for="dia">Día</label>
-          <p><input type="date" id="dia" name="dia"               
-            ></p>  
-           <label for="horarios">Horarios</label>
-         <p id="horarios">{{form.horario}}</p>  
-           
-           
-        
-        
-            
-            <input type="submit" class="btn btn-info" value="Guardar">
-        </form>
-    </div>
+   
+    <section class="about_section layout_padding">
+        <div class="container ">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="detail-box">
+                <div class="heading_container">
+                  <h2>
+                   Crear día para turnos
+                  </h2>
+                </div>
+                
+                <p>
+                    <div class="col d-flex justify-content-center align-items-center ">
+                        <form method="post" class="col-8" novalidate>
+                            {% csrf_token %}
+                            <label for="dia">Día</label>
+                          <p><input type="date" id="dia" name="dia"               
+                            ></p>  
+                           <label for="horarios">Horarios</label>
+                         <p id="horarios">{{form.horario}}</p>  
+                           
+                           
+                        
+                        
+                            
+                            <input type="submit" class="btn btn-info" value="Guardar" onclick="envia()">
+                        </form>
+                    </div>
+                    
+                  
+                        
+                      
+                       
+                       
+                    
+                </p>
+               
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="img-box">
+                <img src="{% static 'images/about-img.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {% endblock %} 
     
-    {% endblock %}   
 </body>
 </html>
 
 
+
+  

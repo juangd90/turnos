@@ -1,17 +1,46 @@
 {% extends "app/base.html" %}
+{% load static %}
 {% block body %}
-<h2>Editar Turno</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-     {{ form.as_p }} 
-    
-   <p>
-    <button type="submit" class="btn btn-primary">Aceptar</button>
-    <a href="../" type="submit" class="btn btn-primary">Volver</a>
-   </p>
- 
-   
-  </form>
 
-  {% endblock %}
+
+ 
+  
+<section class="about_section layout_padding">
+  <div class="container ">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              Edición de turnos
+            </h2>
+          </div>
+          
+          <p>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              
+               {{ form.as_p }} 
+              
+             <p>
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+              <button type="button" class="btn btn-secondary" onclick="window.history.go(-1); return false;">Volver</button>
+              
+             </p>
+           
+             
+            </form>
+             
+          </p>
+         
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src="{% static 'images/about-img.jpg' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

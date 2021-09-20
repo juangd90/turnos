@@ -20,45 +20,55 @@
     
 {% extends "app/base.html" %}
 {% block body %}
-<h2>Lista de turnos</h2>
 
-<table class="table table-success table-striped">
-    <thead>
-        <tr style="align-items: center;">
-            <th>Nombre y Apellido</th>
-            <th>Fecha de Turno</th>
-            <th>Hora del turno</th>
-            <th>Acciones</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        
-        {% for p in object_list %}
-            <tr>
-                <th>{{p.nombre}}</th>
-                <th>{{p.dia.dia}}</th>
-                <th>{{p.hora}}hs</th>
-                <th>
-                    <form method="POST" action="lista_turnos/eliminar/{{p.id}}">
-                        {% csrf_token %}
-                        <div class="btn-group">
-                           
-                        <a href="{% url 'editar_turno' p.id %}" title="Editar" type="button" class="btn btn-primary">Editar </a> 
-                        <hr>
-                        <button class="btn btn-danger" onclick="return eliminar();" type="submit">
-                            Eliminar
-                          </button>
-                        
-                        </button>
-                        </div>
-                        </form>
-                </th>
+<section class="why_us_section layout_padding">
+    <div class="container">
+      
+      <div class="heading_container heading_center">
+        <h2>Lista de turnos</h2>
+        <table class="table table-success table-striped">
+            <thead>
+                <tr style="align-items: center;">
+                    <th>Nombre y Apellido</th>
+                    <th>Fecha de Turno</th>
+                    <th>Hora del turno</th>
+                    <th>Acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
                 
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                {% for p in object_list %}
+                    <tr>
+                        <th>{{p.nombre}}</th>
+                        <th>{{p.dia.dia}}</th>
+                        <th>{{p.hora}}hs</th>
+                        <th>
+                            <form method="POST" action="lista_turnos/eliminar/{{p.id}}">
+                                {% csrf_token %}
+                                <div class="btn-group">
+                                   
+                                <a href="{% url 'editar_turno' p.id %}" title="Editar" type="button" class="btn btn-primary">Editar </a> 
+                                <hr>
+                                <button class="btn btn-danger" onclick="return eliminar();" type="submit">
+                                    Eliminar
+                                  </button>
+                                
+                                </button>
+                                </div>
+                                </form>
+                        </th>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+
+ </div>
+ </section> 
+
+
 
 {% endblock %}
 

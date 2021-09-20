@@ -29,43 +29,71 @@
     
     
     </script>
+    <title>Reservar Turno</title>
 </head>
-<body>
+<body>    
     {% extends "app/base.html" %}
-
-{% block body %}
-<h1>Turnos</h1>
- 
-<form method="POST" action="">
-    {% csrf_token %}
-    <label for="nombre">Nombre</label>
-<input type="text" id="nombre" name="nombre"> <br>
-<label for="dni">DNI</label>
-<input type="text" id="dni" name="dni"> <br>
-<label for="fecha">Seleccione la fecha</label>
-    <input type="date"  id="fecha" name="fecha"
+    {% load static %}
+    {% block body %}
+<section class="about_section layout_padding">
+    <div class="container ">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                Elección de turnos
+              </h2>
+            </div>
+            
+            <p>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <label for="nombre">Nombre y apellido</label> <br>
+                <input type="text" id="nombre" name="nombre"> <br>
+                <label for="dni">DNI</label> <br>
+                <input type="text" id="dni" name="dni"> <br>
+                <label for="fecha">Seleccione la fecha</label> <br>
+                    <input type="date"  id="fecha" name="fecha"
+                                 
+                    min="2021-01-01" max="2021-12-31">
+                    <br>
+                    
+                    <button type="submit" class="btn btn-primary" onclick=" return validaciones()">Ver horarios disponibles</button>
+                </form>
+                
+                   <br>
                  
-    min="2021-01-01" max="2021-12-31">
-    <br>
-    <button type="submit" class="btn btn-primary" onclick=" return validaciones()">Ver horarios disponibles</button>
-</form>
-
-   <br>
+                 <div id="primero" style="opacity: 0.0;">
+                    {{primer_dia}}
+                 </div>  
+                
+                 <div id="ultimo" style="opacity: 0.0;">
+                     {{ultimo_dia}}
+                 </div>
+                 {% for t in todos %}
+                 {{t}} <br>
+                {% endfor %}
+                    
+                  
+                   
+                   
+                
+            </p>
+           
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.jpg' %}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
  
- <div id="primero" style="opacity: 0.0;">
-    {{primer_dia}}
- </div>  
-
- <div id="ultimo" style="opacity: 0.0;">
-     {{ultimo_dia}}
- </div>
- {% for t in todos %}
- {{t}} <br>
-{% endfor %}
     
-  
-   
-   
-{% endblock %}
+
+  {% endblock %}
 </body>
 </html>

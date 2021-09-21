@@ -1,0 +1,24 @@
+{% extends "app/base.html" %}
+{% block body %}
+<section class="why_us_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+         
+            <form method="POST" action="">
+                {% csrf_token %}
+                <label for="username">Usuario</label>
+                <p><i class="fa fa-user" aria-hidden="true"></i>
+                    <input type="text" name="username"></p>
+                <label for="password">Contraseña</label> 
+                <p><i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="password" name="password"  ></p>
+                  <input class="btn btn-primary" type="submit" value="Ingresar">
+                
+            </form>
+        </h2>
+      </div>
+
+ </div>
+ </section>   
+ {% endblock %}  

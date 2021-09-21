@@ -40,13 +40,13 @@
       <div class="header_top">
         <div class="container-fluid">
           <div class="top_nav_container">
-            <a class="navbar-brand d-none d-lg-flex" href="index.html">
+            <a class="navbar-brand d-none d-lg-flex" href="{% url 'index' %}">
               <span>
                 Reparaciones
               </span>
             </a>
             <div class="contact_nav">
-              <a href="">
+              <a href="{% url 'index' %}">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
                   3624857496
@@ -81,17 +81,27 @@
                   <a class="nav-link pl-lg-0" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="service.html">Servicios</a>
+                  <a class="nav-link" href="{% url 'turnos' %}">Reservar turno</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html"> Acerca de</a>
+                  <a class="nav-link" href="{% url 'busqueda' %}">Busca turno</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'lista_turnos' %}">Lista de turnos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="why.html">Por qué elegirnos</a>
+                  <a class="nav-link" href="{% url 'alta_dia' %}">Agregar día</a>
                 </li>
+                
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Conctactenos</a>
+                  <a class="nav-link" href="{% url 'logout' %}">Desloguear-{{request.user}}</a>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Ingreso Admin</a>
+                </li>
+                {% endif %}
               </ul>
               
             </div>
@@ -110,10 +120,10 @@
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_detail">
             <h4>
-              About
+              Acerca De
             </h4>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+              Página demo sobre un servicio de reparación de PC. En el cual se pueden obtener turnos para el servicio de reparación, ademas de buscar el turno asignado.
             </p>
             <div class="footer_social">
               <a href="">
@@ -133,64 +143,41 @@
         </div>
         <div class="col-md-6 col-lg-2 mx-auto footer-col">
           <div class="footer_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="footer_links">
-              <a class="active" href="index.html">
-                Home
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="contact.html">
-                Contact Us
-              </a>
-            </div>
+           
+           
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 footer-col">
+        <div class="col-md-6 col-lg-2 footer-col">
           <div class="footer_contact">
             <h4>
-              Contact Info
+              Contacto
             </h4>
             <div class="contact_link_box">
               <p>
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
-                  Location
+                  Resistencia-Chaco-Argentina
                 </span>
               </p>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  3624857496
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  juan.gandulfo90@gmail.com
                 </span>
               </a>
               <p>
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
                 <span>
-                  Mon-Sat: 09.00 am - 06.00 pm
+                  Lun-Vie: 09.00 am - 19.00 pm
                 </span>
               </p>
-              <p>
-                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                <span>
-                  Sunday: closed
-                </span>
-              </p>
+              
             </div>
           </div>
         </div>
@@ -200,8 +187,7 @@
     <div class="footer-info">
       <div class="container">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
+          &copy; <span id="displayYear"></span> Juan Pablo Gandulfo
         </p>
       </div>
     </div>

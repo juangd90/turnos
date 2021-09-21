@@ -17,9 +17,18 @@
       }  
     })
     function validaciones(){
-        var horas=document.getElementById("horas").value
+        var nombre=document.getElementById("nombre").value
         var dias=document.getElementById("dia").value
-        alert("Turno generado para el día "+ dias +" a las "+ horas+" horas")
+        var dni=document.getElementById("dni").value
+        if(nombre=='' || dni=='' || fecha=='' ){
+          alert("Ningún campo puede estar vacío")
+           return false
+           
+        } 
+          alert("Turno generado para el día "+ dias +" a las "+ horas+" horas")
+          return true
+        
+        
     }
    
   
@@ -62,8 +71,8 @@
 <input type="text" id="dia" name="dia" value="{{dia}}" readonly> <br>
 <br>
 <p>Si la información es correcta, puede reservar el turno</p>
-<button type="submit" class="btn btn-primary" onclick="validaciones()">Reservar Turno</button>
-<a href="{% url 'turnos' %}" type="submit"  class="btn btn-primary">Volver</a>
+<button type="submit" class="btn btn-primary" onclick= " return validaciones()">Reservar Turno</button>
+<button type="button" class="btn btn-secondary" onclick="window.history.go(-1); return false;">Volver</button>
 </form>
                    
                    

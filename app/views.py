@@ -1,10 +1,12 @@
 from django.db.models import fields
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Turno, Dia,Hora
 import datetime
 from django.urls.base import reverse_lazy
-from django.views.generic import ListView, DetailView 
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def index(request):
@@ -66,29 +68,50 @@ def Busqueda(request):
         return render(request,"app/busca_turno.html")    
 
 
-class AltaDia(CreateView):
+class AltaDia(LoginRequiredMixin,CreateView):
+    login_url='login'
     model=Dia
     form=Dia
     fields="__all__"
     success_url=reverse_lazy('index')    
 
         
-class ListaTurnos(ListView):
+class ListaTurnos(LoginRequiredMixin,ListView):
+    login_url='login'
     model=Turno
     form=Turno
     fields="__all__"
     success_url=reverse_lazy('index') 
 
-class EditarTurnos(UpdateView):
+class EditarTurnos(LoginRequiredMixin,UpdateView):
+    login_url='login'
     model=Turno
     form=Turno
     fields="__all__"
     template_name="app/editar_turno.html"
     success_url=reverse_lazy('lista_turnos') 
 
-class EliminarTurno(DeleteView):
+class EliminarTurno(LoginRequiredMixin,DeleteView):
+    login_url='login'
     model=Turno
     form=Turno
     fields="__all__"    
     success_url=reverse_lazy('lista_turnos') 
 
+def logout_user(request):
+    logout(request)
+    return redirect("index") 
+
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+       if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+       context={}
+       return render(request,'app/login.html',context) 

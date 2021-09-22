@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,15 +6,7 @@
    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript">
-    window.addEventListener("load",function(){
-        
-        var primero=document.getElementById("primero").innerText
-        var ultimo=document.getElementById("ultimo").innerText
-      
-        document.getElementById("fecha").min=primero
-        document.getElementById("fecha").max=ultimo
-        
-    })
+  
     function validaciones(){
         let nombre=document.getElementById("nombre").value
         let dni=document.getElementById("dni").value
@@ -32,9 +25,10 @@
     <title>Reservar Turno</title>
 </head>
 <body>    
-    {% extends "app/base.html" %}
+  {% extends "app/base.html" %}
     {% load static %}
     {% block body %}
+    
 <section class="about_section layout_padding">
     <div class="container ">
       <div class="row">
@@ -62,20 +56,15 @@
                     <button type="submit" class="btn btn-primary" onclick=" return validaciones()">Ver horarios disponibles</button>
                 </form>
                 
-                   <br>
-                 
-                 <div id="primero" style="opacity: 0.0;">
-                    {{primer_dia}}
-                 </div>  
-                
-                 <div id="ultimo" style="opacity: 0.0;">
-                     {{ultimo_dia}}
-                 </div>
-                 {% for t in todos %}
-                 {{t}} <br>
-                {% endfor %}
-                    
-                  
+                   <br>              
+              
+                                 
+                {% block javascript %}
+                <script>
+                   document.getElementById("fecha").min="{{primer_dia}}"
+                   document.getElementById("fecha").max="{{ultimo_dia}}"
+                </script>
+                {% endblock %}
                    
                    
                 
